@@ -1,0 +1,99 @@
+{
+  "Authentication" : {
+
+    "Key" : "M1hVNlgwTDZWVTA4TklETEpKVk4wMk9KWVZVVVNKN1I6WVQxV1BBMjkzV01OVkRKUzAxSUNFMlNONFVURUQxWFM="
+
+  },
+
+  "Content-Type" : {
+
+    "Key" : "application/json"
+
+  },
+
+  "BRAND" : {
+    "BrandID": "ID",
+    "Name": "STRING",
+    "Description": "STRING"
+  },
+
+  "CATEGORY" : {
+    "CategoryID": "ID",
+    "Name": "STRING",
+    "Description": "STRING",
+    "ParentID": "NULLID",
+    "ShowOnTill": "BOOL",
+    "Wet": "BOOL",
+    "ButtonColourID": "NULLID",
+    "SortPosition": "NULLID",
+    "ReportingCategoryID": "NULLID",
+    "NominalCode": "STRING"
+  },
+
+  "COLOUR" : {
+    "ColourID": "ID",
+    "ColourCode": "INT",
+    "ColourName": "STRING"
+  },
+
+  "LOCATION" : {
+    "LocationID": "INT",
+    "LocationAreaID": "NULLID",
+    "Name": "STRING",
+    "Description": "STRING",
+    "Address1": "STRING",
+    "Address2": "STRING",
+    "Town": "STRING",
+    "County": "STRING",
+    "PostCode": "STRING",
+    "EmailAddress": "STRING"
+  },
+
+  "PRODUCT" : {
+    "ProductID": "INT",
+    "Name": "STRING",
+    "Description": "STRING",
+    "CostPrice": "PRICE",
+    "SalePrice": "PRICE",
+    "EatOutPrice": "PRICE",
+    "CategoryID": "INT",
+    "Barcode": "STRING",
+    "TaxRateID": "NULLID",
+    "EatOutTaxRateID": "NULLID",
+    "BrandID": "NULLID",
+    "SupplierID": "NULLID",
+    "PopupNoteID": "NULLID",
+    "UnitOfSale": "DEC",
+    "VolumeOfSale": "DEC",
+    "MultiChoiceID": "NULLID",
+    "ColourID": "NULLID",
+    "VariantGroupID": "NULLID",
+    "Size": "SIZE",
+    "Sku": "STRING",
+    "SellOnWeb": "BOOL",
+    "SellOnTill": "BOOL",
+    "OrderCode": "string",
+    "ButtonColourID": "NULLID",
+    "SortPosition": "INT",
+    "MagentoAttributeSetID": "NULLID",
+    "RRPrice": "INT",
+    "CostPriceTaxRateID": "NULLID",
+    "ProductType": "INT",
+    "TareWeight": "INT",
+    "ArticleCode": "string"
+  },
+
+  "PRODUCTSTOCK" : {
+    "StockID": "INT",
+    "LocationID": "NULLID",
+    "ProductID": "NULLID",
+    "CurrentStock": "INT",
+    "MinStock": "INT",
+    "MaxStock": "INT",
+    "CurrentVolume": "INT",
+    "OnOrder": "INT",
+    "Alerts": "BOOL",
+    "CostPrice": "INT"
+  }
+
+}
