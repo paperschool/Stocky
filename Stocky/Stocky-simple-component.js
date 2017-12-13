@@ -182,11 +182,14 @@ StockyCheckBox.prototype.init = function (callback) {
         '</span>' +
         '</label>' +
         '</div>')
-        .appendTo(this.checkboxParent)
-        .find("span").css({'opacity':(this.checkboxstate ? 1 : 0)});
+        .appendTo(this.checkboxParent);
+
+    this.checkbox.find("span").css({'opacity':(this.checkboxstate ? 1 : 0)});
 
     this.checkbox.click((function(){
-        if(typeof callback === 'function') callback();
+        this.checkboxstate = !this.checkboxstate;
+        this.checkbox.find("span").css({'opacity':(this.checkboxstate ? 1 : 0)});
+        if(typeof callback === 'function') callback(this.checkboxstate);
     }).bind(this));
 
 };
@@ -198,3 +201,92 @@ StockyCheckBox.prototype.toggle = function (state) {
 };
 
 StockyCheckBox.prototype.get = function () {return this.checkbox;};
+
+
+/**
+ * A selectable (clickable) object found in dropdown lists, search queries etc
+ * @param parent          - Parent html div
+ * @param key             - Key value (often some kind of ID)
+ * @param value           - Value (The value associated with the current ID)
+ * @param index           - Index of the element in the list
+ * @param callback        - Function pointer that runs when selectable element is clicked on.
+ * @constructor
+ */
+function StockySelectableOption(parent,key,value,index,callback){
+
+    // callback method pointer
+    this.callback = callback;
+
+    // object storing html parent
+    this.optionParent = parent;
+
+    // option id key
+    this.optionKey = key;
+
+    // option value info
+    this.optionValue = value;
+
+    // option index in original data
+    this.optionIndex = index;
+
+    // option html object
+    this.option = null;
+
+    // selected state (true or false)
+    this.selected = false;
+
+    // render selectable option method
+    this.renderOption();
+
+}
+
+// method to hide option through display css attribute
+StockySelectableOption.prototype.hideOption = function () {
+    this.option.css({'display':'none'});
+};
+
+// method to show option through display css attribute
+StockySelectableOption.prototype.showOption = function () {
+    this.option.css({'display':'inline'});
+};
+
+// method to render the dropdown option, associated ids and link click behaviour to its callback method
+StockySelectableOption.prototype.renderOption = function () {
+
+    // creating dropdown selection css
+    this.option = $('<div selected="false" class="Stocky_Selectable_Option">'+this.optionValue+'</div>')
+        .effect("highlight", { color: '#2ecc71' }, 500)
+        .css({'display':'inline'})
+        .appendTo(this.optionParent);
+
+    // if special option seperate with HR
+    if(this.optionIndex === -1){
+        $('<hr>').appendTo(this.optionParent);
+    }
+
+    // onclick function that toggles selected boolean, logs click with info and runs callback method
+    this.option.click((function () {
+
+        // modify internal state if option isnt special option
+        if(this.optionIndex !== -1){
+            this.toggleOption();
+        }
+
+        // run callback with index of selected item
+        this.callback(this.optionIndex);
+
+        // output selection details
+        // console.log("Dropdown Option Clicked..." + this.optionKey + " : " + this.optionValue + " @ " + this.optionIndex);
+    }).bind(this));
+
+};
+
+// method ran on selection click event
+StockySelectableOption.prototype.toggleOption = function () {
+
+    // invert selected state
+    this.selected = !this.selected;
+    // set selected attribute for css
+    this.option.attr('selected',this.selected);
+
+};

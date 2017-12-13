@@ -47,7 +47,7 @@ StockySelection.prototype.renderSelection = function () {
 
 };
 
-function StockySelector(parent,bodyData,keyValAssociation){
+function StockySelector(parent,keyValAssociation){
 
     var self = this;
 
@@ -55,7 +55,7 @@ function StockySelector(parent,bodyData,keyValAssociation){
     self.selector      = $('<table class="table table-hover" id="'+self.selectorParent+'_selector" ></table>').appendTo(self.selectorParent);
     self.selectorBody  = $('<tbody id="'+idcon(this.selectorParent,'b')+'"></tbody>').appendTo(self.selector);
 
-    self.bodyData = bodyData;
+    self.bodyData = null;
 
     self.selectors = [];
     self.keyValAssociation = keyValAssociation;
@@ -69,7 +69,11 @@ StockySelector.prototype.getSelectedData = function(){
 };
 
 StockySelector.prototype.setBodyData = function(data){
-    this.bodyData = data;
+    this.bodyData = this.ExtractUnique(data);
+};
+
+StockySelector.prototype.ExtractUnique = function () {
+
 };
 
 StockySelector.prototype.init = function(){
@@ -101,7 +105,6 @@ StockySelector.prototype.setFilter = function(filterHeader, filterValue){
     this.filterValue = {"header":filterHeader,"value":filterValue};
 
 };
-
 
 StockySelector.prototype.applyFilter = function () {
     for(var selector = this.selectors.length - 1 ; selector > 0 ; selector--){

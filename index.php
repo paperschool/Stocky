@@ -33,25 +33,51 @@
 
         <div class="card-block">
 
-            <h4 class="card-title">Stocky Request Count</h4>
-            <h6 class="card-subtitle mb-2 text-muted">A progress bar illustrating the number of requests the system can make this hour</h6>
+            <h4 class="card-title">Authenticate</h4>
 
-            <div class="row">
-                <div class="col-10">
-                    <div class="progress">
-                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 25%"></div>
-                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 50%"></div>
-                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
-                    </div>
+            <div class="form-group row">
+                <label class="col-2 col-form-label">Authentication key</label>
+                <div class="col-8">
+                    <input class="form-control" type="text" value="" placeholder="2hmg3v2klj3hv2l3uou423bn4o23j4bn23o4ub232o34b23oj4b234o=" id="authenticate-input">
                 </div>
-                <div class="col-2"><p>2000/4000</p></div>
-
+                <button type="button" class="btn btn-success col-2" id="authenticate-submit">Submit</button>
             </div>
+
+            <script>
+                $('#authenticate-submit').click((function () {
+                    main($('#authenticate-input').val());
+                }));
+            </script>
+
         </div>
 
     </div>
 
+<!--    <div class="card">-->
+<!---->
+<!--        <div class="card-block">-->
+<!---->
+<!--            <h4 class="card-title">Stocky Request Count</h4>-->
+<!--            <h6 class="card-subtitle mb-2 text-muted">A progress bar illustrating the number of requests the system can make this hour</h6>-->
+<!---->
+<!--            <div class="row">-->
+<!--                <div class="col-10">-->
+<!--                    <div class="progress">-->
+<!--                        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 25%"></div>-->
+<!--                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 50%"></div>-->
+<!--                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-2"><p>2000/4000</p></div>-->
+<!---->
+<!--            </div>-->
+<!--        </div>-->
+<!---->
+<!--    </div>-->
+
     <hr>
+
+    <h1>Stocky</h1>
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
@@ -74,22 +100,30 @@
 
                     <div class="row">
                         <div class="col-6">
-                            <div id="brandAccordion_1"> <script> renderAccordionTable('brandAccordion_1','Brand Editor','brandEditorTable','Brand Editor Table'); </script> </div>
+                            <div id="brandAccordion_1">
+                                <script> renderAccordionTable('brandAccordion_1','Brand Editor','brandEditorTable','Brand Editor Table'); </script>
+                            </div>
                         </div>
                         <div class="col-6">
-                            <div id="colourAccordion_1"> <script> renderAccordionTable('colourAccordion_1','Colour Editor','colourEditorTable','Brand Selector'); </script> </div>
+                            <div id="colourAccordion_1">
+                                <script> renderAccordionTable('colourAccordion_1','Colour Editor','colourEditorTable','Brand Selector'); </script>
+                            </div>
                         </div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col">
-                            <div id="categoryAccordion_1"> <script> renderAccordionTable('categoryAccordion_1','Category Editor','categoryEditorTable','Category Selector'); </script> </div>
+                            <div id="categoryAccordion_1">
+                                <script> renderAccordionTable('categoryAccordion_1','Category Editor','categoryEditorTable','Category Selector'); </script>
+                            </div>
                         </div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col">
-                            <div id="debugAccordion_1"> <script> renderAccordionTable('debugAccordion_1','Debug Tools','debugTools','DEBUG TOOLS'); </script> </div>
+                            <div id="debugAccordion_1">
+<!--                                <script> renderAccordionTable('debugAccordion_1','Debug Tools','debugTools','DEBUG TOOLS'); </script> -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -113,7 +147,7 @@
                         <div class="card-block">
                             <h4 class="card-title">Product from Matrix</h4>
                             <h6 class="card-subtitle mb-2 text-muted">Listing Out all Products Created Above</h6>
-                            <div id="productBuilderResultBody"></div>
+                            <div id="productBuilderResultBody" style="height:500px;overflow-y: auto;"></div>
                         </div>
                     </div>
 

@@ -11,7 +11,7 @@
  */
 var Stocky = (function() {
 
-    var registeredDataSets = [];
+    var registeredDataSets = {};
 
     var registeredComponents = [];
 
@@ -21,11 +21,17 @@ var Stocky = (function() {
 
     var $alert = null;
 
-    function init(path){
+    var apiURL = null
+
+    function init(path,url,authkey){
+
+        apiURL = url;
 
         loadJSON(function(response){
             console.log(" > Fetching App Settings...");
             Stocky.preferences = response;
+
+            // Authentication.defineAccessToken(authkey);
             Authentication.defineAccessToken(Stocky.preferences['Authentication']['Key']);
             setRequestReady(true);
             Stocky.initDataSets();
@@ -69,19 +75,38 @@ var Stocky = (function() {
         return typeof Stocky.preferences[key] !== 'undefined' ? JSON.parse(JSON.stringify(Stocky.preferences[key])) : null;
     }
 
+    function registerSimpleComponent(id,object,callback){
+        registeredDataSets[id].registerSimpleComponent(object,callback);
+        return object;
+    }
 
-    function registerDataSet(datasetObject){
+    function registerComponent(id,object){
+        registeredDataSets[id].registerComponent(object);
+        return object;
+    }
 
-        registeredDataSets.push({"name":datasetObject.datasetID,"object":datasetObject});
+    function getComponent(id){
+        return registeredDataSets[id];
+    }
+
+    function registerDataSet(id,endpoint,preference,params){
+
+
+        registeredDataSets[id] = new StockyDataSet(id,apiURL + endpoint,preference);
 
         if(getRequestReady()){
-            registeredDataSets[registeredDataSets.length - 1]['object'].init();
+
+            registeredDataSets[id].init();
         }
+
+        return registeredDataSets[id];
+
     }
 
     function initDataSets(){
-        for(var i = 0 ; i < registeredDataSets.length ; i++){
-            registeredDataSets[i]['object'].init();
+
+        for(var key in registeredDataSets){
+            registeredDataSets[key].init();
         }
     }
 
@@ -109,14 +134,17 @@ var Stocky = (function() {
     }
 
     return {
+        init : init,
+        alert : alert,
         setSavedStatus : setSavedStatus,
         checkUnsaved : checkUnsaved,
-        alert : alert,
         registerDataSet : registerDataSet,
+        registerComponent:registerComponent,
+        registerSimpleComponent:registerSimpleComponent,
         initDataSets : initDataSets,
-        init : init,
         getRequestReady : getRequestReady,
         getPreference : getPreference,
+        getComponent : getComponent,
         preferences : preferences,
         $alert : $alert
     }
@@ -131,6 +159,9 @@ var Validation = (function(){
         var success = false;
 
         switch(type){
+            case "ACTION":
+
+                break;
             case "NULL" :
 
                 success = true;
@@ -149,6 +180,10 @@ var Validation = (function(){
                     }
                 }
 
+                break;
+
+            case "NULLID" :
+                success = Validation.Type("ID",content);
                 break;
             case "WHITESPACE" :
                 if( content === "" ||
@@ -226,10 +261,9 @@ var Validation = (function(){
 
                 if(!Validation.Type("NULL",content)){ success = false; break; }
 
-                typeof /^\[0-9]+$/.test(content) ? success = true : success = false;
+                typeof /^-?\d+$/.test(content) ? success = true : success = false;
 
                 break;
-
             case "ID":
                 if(!Validation.Type("NULL",content)){ success = false; break; }
 

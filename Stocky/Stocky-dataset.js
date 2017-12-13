@@ -15,7 +15,7 @@ function StockyDataSet(datasetID,requestLine,preference){
 
     this.requestLine = requestLine;
 
-    this.requestQueue = new StockyRequestQueue(this,2,200);
+    this.requestQueue = new StockyRequestQueue(this,preference,2,200);
 
     this.preferenceKey = preference;
 
@@ -26,7 +26,6 @@ StockyDataSet.prototype.init = function () {
     this.dataset = null;
 
     this.appendRequest("GET",'');
-
 
     // var getrequest = API.GET(this.requestLine);
     //
@@ -46,6 +45,12 @@ StockyDataSet.prototype.init = function () {
 
 };
 
+// StockyDataSet.prototype.appendActionColumn = function(){
+//
+//     for(var row = 0 ; row < this.dataset.length ; row++){
+//         this.dataset[row]['ACTION'] = 0;
+//     }
+// };
 
 StockyDataSet.prototype.jsonToKeySet = function(data){
     if(typeof data === 'undefined') return;
@@ -97,6 +102,7 @@ StockyDataSet.prototype.jsonToDataset = function(data){
 StockyDataSet.prototype.refreshData = function (data) {
     // console.log(" > Fetching DataSet Data...");
     this.dataset = data;
+
     this.updateRegisteredObjects();
 };
 
@@ -104,7 +110,7 @@ StockyDataSet.prototype.getPreferenceKey = function () {
     return this.preferenceKey;
 };
 
-StockyDataSet.prototype.getPreferences = function () {
+StockyDataSet.prototype.getPreference = function () {
     return Stocky.getPreference(this.preferenceKey);
 };
 
@@ -131,8 +137,10 @@ StockyDataSet.prototype.registerSimpleComponent = function (object,callback) {
 
 StockyDataSet.prototype.updateRegisteredObjects = function () {
 
+
+
     for(var object = 0 ; object < this.registeredObjects.length ; object++){
-        this.registeredObjects[object].refresh(this.jsonToKeySet(this.dataset),this.jsonToDataset(this.dataset));
+        this.registeredObjects[object].refresh(this.dataset);
     }
 
     for(var object = 0 ; object < this.registeredSimpleObjects.length ; object++){
@@ -141,13 +149,19 @@ StockyDataSet.prototype.updateRegisteredObjects = function () {
 
 };
 
+/**
+ * Method ran when any control held under the dataset wants to make a http request
+ * @param type       - GET, DELETE POST or PUT
+ * @param payload    - The json row of data
+ * @param stringify  - Boolean if the method should attempt to stringify the row before locking into a payload
+ */
 StockyDataSet.prototype.appendRequest = function (type,payload,stringify) {
 
     var reqline = this.requestLine;
 
-    if(type !== "POST" && type !== "GET"){
-        reqline += "/" + payload[Object.keys(payload)[0]];
-    }
+    // if(type !== "POST" && type !== "GET"){
+    //     reqline += "/" + payload[Object.keys(payload)[0]];
+    // }
 
     if(stringify){
         payload = JSON.stringify(payload);
@@ -158,5 +172,5 @@ StockyDataSet.prototype.appendRequest = function (type,payload,stringify) {
 };
 
 StockyDataSet.prototype.fail = function (type,error) {
-    print(" TYPE: '" + type + "' URI: " + this.requestLine + " Request Failed with: " + error + " - Try refreshing page!");
+    // print(" TYPE: '" + type + "' URI: " + this.requestLine + " Request Failed with: " + error + " - Try refreshing page!");
 };

@@ -1,0 +1,36 @@
+
+.Stocky_Selectable_Option {
+    padding-left: 25px;
+    padding-bottom: 5px;
+    cursor: pointer;
+    text-align: left;
+    background-color: white;
+    color: #1b1e21;
+}
+
+.Stocky_Selectable_Option:active {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.Stocky_Selectable_Option:hover {
+    background-color: #6c757d;
+    color: white;
+}
+
+.Stocky_Selectable_Option[selected="selected"]:active {
+    background-color: #2ecc71;
+    color: white;
+}
+
+
+.Stocky_Selectable_Option[selected="selected"] {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.Stocky_Selectable_Option[selected="selected"]:hover  {
+    background-color: #f35955;
+    color: white;
+}
+

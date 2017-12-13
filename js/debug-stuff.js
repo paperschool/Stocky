@@ -3,14 +3,14 @@
  */
 
 
-function createDebugButtons(BrandDataSet,ColourDataSet,CategoryDataSet,LocationDataSet,ProductDataSet,StockDataSet){
+function createDebugButtons(){
 
 
     // ONLY FOR TESTING...
 
     var productdata = null;
 
-    ProductDataSet.registerSimpleComponent(new StockyButton($('#debugTools'),"DELETE ALL PRODUCTS","danger",
+    Stocky.registerSimpleComponent(ProductDataSet,new StockyButton($('#debugTools'),"DELETE ALL PRODUCTS","danger",
         (function(){
 
             console.log(productdata);
@@ -25,12 +25,10 @@ function createDebugButtons(BrandDataSet,ColourDataSet,CategoryDataSet,LocationD
         productdata = body;
     }
 
-    LocationDataSet.registerComponent(new StockyComponent($('#debugTools'),null,[0,2],'table'));
+    Stocky.registerComponent('LocationDataSet',new StockyComponent($('#debugTools'),null,[0,2],'table'));
 
 
     ////////////////////////////////////////////////////////////////////////////////////
-
-
 
 }
 

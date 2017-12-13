@@ -12,18 +12,18 @@
   },
 
   "BRAND" : {
-    "BrandID": "ID",
+    "Id": "ID",
     "Name": "STRING",
     "Description": "STRING"
   },
 
   "CATEGORY" : {
-    "CategoryID": "ID",
+    "Id": "ID",
     "Name": "STRING",
     "Description": "STRING",
-    "ParentID": "NULLID",
+    "ParentId": "NULLID",
     "ShowOnTill": "BOOL",
-    "Wet": "BOOL",
+    "IsWet": "BOOL",
     "ButtonColourID": "NULLID",
     "SortPosition": "NULLID",
     "ReportingCategoryID": "NULLID",
@@ -31,9 +31,9 @@
   },
 
   "COLOUR" : {
-    "ColourID": "ID",
-    "ColourCode": "INT",
-    "ColourName": "STRING"
+    "Id": "ID",
+    "Code": "INT",
+    "Name": "STRING"
   },
 
   "LOCATION" : {
@@ -50,37 +50,39 @@
   },
 
   "PRODUCT" : {
-    "ProductID": "INT",
+    "Id": "INT",
     "Name": "STRING",
     "Description": "STRING",
-    "CostPrice": "PRICE",
-    "SalePrice": "PRICE",
-    "EatOutPrice": "PRICE",
-    "CategoryID": "INT",
+    "IsCostPriceIncTax": "BOOL",
+    "IsSalePriceIncTax": "BOOL",
+    "IsEatOutPriceIncTax": "BOOL",
+    "CostPrice": "INT",
+    "SalePrice": "INT",
+    "EatOutPrice": "INT",
+    "CategoryId": "INT",
     "Barcode": "STRING",
-    "TaxRateID": "NULLID",
-    "EatOutTaxRateID": "NULLID",
-    "BrandID": "NULLID",
-    "SupplierID": "NULLID",
-    "PopupNoteID": "NULLID",
+    "BrandId": "NULLID",
+    "SupplierId": "NULLID",
+    "PopupNoteId": "NULLID",
     "UnitOfSale": "DEC",
     "VolumeOfSale": "DEC",
-    "MultiChoiceID": "NULLID",
-    "ColourID": "NULLID",
-    "VariantGroupID": "NULLID",
-    "Size": "SIZE",
     "Sku": "STRING",
     "SellOnWeb": "BOOL",
     "SellOnTill": "BOOL",
-    "OrderCode": "string",
-    "ButtonColourID": "NULLID",
-    "SortPosition": "INT",
-    "MagentoAttributeSetID": "NULLID",
+    "OrderCode": "STRING",
     "RRPrice": "INT",
-    "CostPriceTaxRateID": "NULLID",
     "ProductType": "INT",
-    "TareWeight": "INT",
-    "ArticleCode": "string"
+    "TareWeight": "DEC",
+    "ArticleCode": "STRING",
+    "SalePriceTaxGroupId": "NULLID",
+    "EatOutPriceTaxGroupId": "NULLID",
+    "CostPriceTaxGroupId": "NULLID",
+    "IsTaxExemptable": "BOOL",
+    "IsVariablePrice": "BOOL",
+    "VariantGroupId": "NULLID",
+    "Size": "STRING",
+    "SortPosition": "INT",
+    "ColourId": "NULLID"
   },
 
   "PRODUCTSTOCK" : {

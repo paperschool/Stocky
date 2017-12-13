@@ -28,6 +28,8 @@
 
     <!--    <script src="js/presets.js"></script>-->
 
+    <link href="Stocky/Stocky.css" rel="stylesheet">
+
     <script src="Stocky/Stocky-html.js"></script>
 
     <script src="Stocky/Stocky.js"></script>

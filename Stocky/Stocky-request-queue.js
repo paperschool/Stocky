@@ -2,12 +2,14 @@
  * Created by Overlord on 11/08/2017.
  */
 
-function StockyRequestQueue(parent,attemptCap,requestDelay) {
+function StockyRequestQueue(parent,title,attemptCap,requestDelay) {
 
     this.parentComponent = parent;
 
     this.pendingRequests = [];
     this.remainingRequests = 0;
+
+    this.title = title;
 
     this.requestDelay = requestDelay;
 
@@ -17,7 +19,7 @@ function StockyRequestQueue(parent,attemptCap,requestDelay) {
     this.RequestID = 0;
 
     if (typeof(this.worker) === "undefined") {
-        this.worker = new Worker("/Stocky/Stocky/Stocky-request-queue-worker.js");
+        this.worker = new Worker("/Stocky/Stocky-request-queue-worker.js");
     }
 
     this.setupWorker();
@@ -27,6 +29,7 @@ function StockyRequestQueue(parent,attemptCap,requestDelay) {
 StockyRequestQueue.prototype.setupWorker = function () {
     var newReq = {"message":"preference",
         "preference":{
+            "worker-name":this.title,
             "attempt-cap":this.attemptCap,
             "request-delay":this.requestDelay
         }
